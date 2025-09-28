@@ -1,42 +1,60 @@
 import { useState } from "react";
 
 export default function Tracking() {
-  const [trackingId, setTrackingId] = useState("");
-  const [status, setStatus] = useState(null);
+  const [trackingNumber, setTrackingNumber] = useState("");
+  const [result, setResult] = useState(null);
 
-  const handleTrack = () => {
-    // Fake tracking response for now
-    if (trackingId === "12345") {
-      setStatus("🚚 Your package is on the way to Metro Manila.");
-    } else if (trackingId === "67890") {
-      setStatus("✅ Your package has been delivered.");
-    } else {
-      setStatus("❌ Tracking ID not found.");
+  const handleTrack = (e) => {
+    e.preventDefault();
+    if (!trackingNumber) {
+      setResult("⚠️ Please enter a tracking number.");
+      return;
     }
+    // Later, you can connect this to your backend or database
+    setResult(`📦 Tracking number "${trackingNumber}" is being processed...`);
   };
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px", fontFamily: "Arial, sans-serif" }}>
       <h1>📍 Shipment Tracking</h1>
-      <p>Enter your tracking ID to see the status of your shipment.</p>
+      <p>Enter your tracking number below to see live updates.</p>
 
-      <input
-        type="text"
-        value={trackingId}
-        onChange={(e) => setTrackingId(e.target.value)}
-        placeholder="Enter Tracking ID"
-        style={{ padding: "10px", borderRadius: "6px", border: "1px solid #ccc", marginRight: "10px" }}
-      />
-      <button
-        onClick={handleTrack}
-        style={{ padding: "10px 20px", backgroundColor: "#0070f3", color: "white", border: "none", borderRadius: "6px" }}
-      >
-        Track
-      </button>
+      <form onSubmit={handleTrack} style={{ marginTop: "20px" }}>
+        <input
+          type="text"
+          placeholder="Enter tracking number"
+          value={trackingNumber}
+          onChange={(e) => setTrackingNumber(e.target.value)}
+          style={{
+            padding: "10px",
+            borderRadius: "8px",
+            border: "1px solid #ccc",
+            width: "250px",
+            marginRight: "10px"
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#0070f3",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "bold"
+          }}
+        >
+          Track
+        </button>
+      </form>
 
-      {status && (
-        <p style={{ marginTop: "20px", fontSize: "18px", fontWeight: "bold" }}>{status}</p>
+      {result && (
+        <p style={{ marginTop: "20px", fontSize: "18px", color: "#333" }}>
+          {result}
+        </p>
       )}
     </div>
   );
 }
+
