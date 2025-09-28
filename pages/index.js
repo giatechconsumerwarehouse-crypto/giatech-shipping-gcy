@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px", fontFamily: "Arial, sans-serif" }}>
@@ -6,21 +8,39 @@ export default function Home() {
       <p>Admin and Client Portal</p>
 
       <nav style={{ marginTop: "40px", display: "flex", justifyContent: "center", gap: "15px" }}>
-        <a href="/" style={linkStyle("#0070f3")}>🏠 Home</a>
-        <a href="/admin" style={linkStyle("#28a745")}>🛠️ Admin</a>
-        <a href="/tracking" style={linkStyle("#ff5722")}>📍 Tracking</a>
+        <Link href="/" legacyBehavior>
+          <a style={{
+            padding: "10px 20px",
+            backgroundColor: "#0070f3",
+            color: "white",
+            borderRadius: "8px",
+            textDecoration: "none",
+            fontWeight: "bold"
+          }}>🏠 Home</a>
+        </Link>
+
+        <Link href="/admin" legacyBehavior>
+          <a style={{
+            padding: "10px 20px",
+            backgroundColor: "#28a745",
+            color: "white",
+            borderRadius: "8px",
+            textDecoration: "none",
+            fontWeight: "bold"
+          }}>🛠 Admin</a>
+        </Link>
+
+        <Link href="/tracking" legacyBehavior>
+          <a style={{
+            padding: "10px 20px",
+            backgroundColor: "#ff5722",
+            color: "white",
+            borderRadius: "8px",
+            textDecoration: "none",
+            fontWeight: "bold"
+          }}>📍 Tracking</a>
+        </Link>
       </nav>
     </div>
   );
-}
-
-function linkStyle(bg) {
-  return {
-    padding: "10px 20px",
-    backgroundColor: bg,
-    color: "white",
-    borderRadius: "8px",
-    textDecoration: "none",
-    fontWeight: "bold"
-  };
-}
+              }
